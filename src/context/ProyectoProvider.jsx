@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import clienteAxios from "../config/clienteAxios";
+import ClienteAxios from "../config/ClienteAxios";
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import io from 'socket.io-client'
@@ -38,7 +38,7 @@ const ProyectosProvider = ({children}) => {
           }
         }
 
-        const { data } = await clienteAxios('/proyectos', config)
+        const { data } = await ClienteAxios('/proyectos', config)
         setProyectos(data)
 
       } catch (error) {
@@ -82,7 +82,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.put(`/proyectos/${proyecto.id}`, proyecto, config)
+      const { data } = await ClienteAxios.put(`/proyectos/${proyecto.id}`, proyecto, config)
       
       const proyectosActualizado = proyectos.map(proyectoState => proyectoState._id === data._id ? data : proyectoState)
       setProyectos(proyectosActualizado)
@@ -113,7 +113,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post( '/proyectos', proyecto, config )
+      const { data } = await ClienteAxios.post( '/proyectos', proyecto, config )
       setProyectos([...proyectos, data])
 
       setAlerta({
@@ -144,7 +144,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios(`/proyectos/${id}`, config)
+      const { data } = await ClienteAxios(`/proyectos/${id}`, config)
       setProyecto(data)
       setAlerta({})
     } catch (error) {
@@ -173,7 +173,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.delete(`/proyectos/${id}`, config)
+      const { data } = await ClienteAxios.delete(`/proyectos/${id}`, config)
 
       const proyectosActualizados = proyectos.filter(proyectoState => proyectoState._id !== id)
       setProyectos(proyectosActualizados)
@@ -218,7 +218,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.put(`/tareas/${tarea.id}`, tarea, config)
+      const { data } = await ClienteAxios.put(`/tareas/${tarea.id}`, tarea, config)
 
       setAlerta({})
       setModalFormularioTarea(false)
@@ -242,7 +242,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post('/tareas', tarea, config)
+      const { data } = await ClienteAxios.post('/tareas', tarea, config)
       console.log(data)
 
       setAlerta({})
@@ -277,7 +277,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.delete(`/tareas/${tarea._id}`,config)
+      const { data } = await ClienteAxios.delete(`/tareas/${tarea._id}`,config)
       setAlerta({
         msg: data.msg,
         error: false
@@ -311,7 +311,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post('/proyectos/colaboradores', {email}, config)
+      const { data } = await ClienteAxios.post('/proyectos/colaboradores', {email}, config)
       setColaborador(data)
       setAlerta({})
     } catch (error) {
@@ -337,7 +337,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post(`/proyectos/colaboradores/${proyecto._id}`, email, config)
+      const { data } = await ClienteAxios.post(`/proyectos/colaboradores/${proyecto._id}`, email, config)
       setAlerta({
         msg: data.msg,
         error: false
@@ -372,7 +372,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post(`/proyectos/eliminar-colaborador/${proyecto._id}`,{id: colaborador._id}, config)
+      const { data } = await ClienteAxios.post(`/proyectos/eliminar-colaborador/${proyecto._id}`,{id: colaborador._id}, config)
 
       const proyectoActualizado ={...proyecto}
       proyectoActualizado.colaboradores = proyectoActualizado.colaboradores.filter(colaboradorState => colaboradorState._id !== colaborador._id)
@@ -404,7 +404,7 @@ const ProyectosProvider = ({children}) => {
         }
       }
 
-      const { data } = await clienteAxios.post(`/tareas/estado/${id}`,{}, config)
+      const { data } = await ClienteAxios.post(`/tareas/estado/${id}`,{}, config)
 
       
       setTarea({})

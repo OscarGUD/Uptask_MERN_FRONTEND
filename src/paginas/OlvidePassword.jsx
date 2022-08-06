@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import clienteAxios from "../config/clienteaxios"
+import ClienteAxios from "../config/ClienteAxios"
 import Alerta from '../components/Alerta'
 import { isValidEmail } from "../helpers/emailRegularExpresion"
 
@@ -21,8 +21,7 @@ const OlvidePassword = () => {
     }
 
     try {
-      const url = `/usuarios/olvide-password`
-      const { data } = await clienteAxios.post(url, { email })
+      const { data } = await ClienteAxios.post(`/usuarios/olvide-password`, { email })
       setAlerta({
         msg: data.msg,
         error: false
