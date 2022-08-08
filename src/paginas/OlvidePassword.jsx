@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import ClienteAxios from "../config/ClienteAxios"
+import axios from "axios"
 import Alerta from '../components/Alerta'
 import { isValidEmail } from "../helpers/emailRegularExpresion"
 
@@ -21,7 +21,7 @@ const OlvidePassword = () => {
     }
 
     try {
-      const { data } = await ClienteAxios.post(`/usuarios/olvide-password`, { email })
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/olvide-password`, { email })
       setAlerta({
         msg: data.msg,
         error: false

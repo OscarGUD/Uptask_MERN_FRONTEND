@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Alerta from '../components/Alerta'
-import ClienteAxios from '../config/ClienteAxios'
+import axios from 'axios'
 import useAuth from '../hooks/useAuth'
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     try {
-      const { data } = await ClienteAxios.post(`/usuarios/login`,{ email, password })
+      const { data } = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/usuarios/login`,{ email, password })
       setAlerta({})
       localStorage.setItem('token', data.token)
       setAuth(data)
